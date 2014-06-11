@@ -1,7 +1,8 @@
-# -*- coding: cp1252 -*-
 import pymongo
 import bottle
 import sys
+
+#Specify the Connection Parameters to Localhost
 
 connection = pymongo.MongoClient("mongodb://localhost")
 db = connection.test          # attach to db
@@ -9,12 +10,11 @@ collec_albums = db.albums     # specify the colllection
 collec_images = db.images
 collec_imglist = db.imglist
 
-
+#Print the initial collection counts
 print "Album Count: ",collec_albums.count()
 print "Images Count: ",collec_images.count()
 
 #Print the Image Count Prior to the Delete
-
 Img_CkCur = db.images.aggregate([{"$project":{"tags":1,"_id":0}},{"$unwind":"$tags"},
                          {"$match":{"tags":"kittens"}},{"$group":{"_id":"$tags","count":{"$sum":1}}}])
 
