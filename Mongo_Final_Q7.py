@@ -33,7 +33,7 @@ for doc in Img_base['result']:
 
 Img_CkCurF = db.images.aggregate([{"$project":{"tags":1,"_id":0}},{"$unwind":"$tags"},
                          {"$match":{"tags":"kittens"}},{"$group":{"_id":"$tags","count":{"$sum":1}}}])
-
+#For Loop
 for idoc in Img_CkCurF['result']:
     print 'Total Images(Kitten) Records(Post Removal)',idoc['count']
 
